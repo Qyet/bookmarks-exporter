@@ -2,7 +2,7 @@ import { Export } from "@/components/icons"
 import { Progress } from "@/components/ui/progress"
 import { AppContext } from "@/context/app-context"
 import type { ChangedTreeData } from "@/types/bookmarks"
-import { delay, getClearbitLogoUrl } from "@/utils"
+import { delay, getLogoDevUrl } from "@/utils"
 import { recursiveChange } from "@/utils/tree"
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
@@ -27,7 +27,7 @@ function ExportPopup() {
       ExportTreeDataProps
     >(treeData as ChangedTreeData[], async (item, _index: number) => {
       if (item.type === "link") {
-        const logoUrl = await getClearbitLogoUrl(item.url)
+        const logoUrl = await getLogoDevUrl(item.url)
         return {
           type: item.type,
           addDate: item.dateAdded,
