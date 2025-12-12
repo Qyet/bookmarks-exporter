@@ -6,11 +6,11 @@ export const getCopyYear = () => {
   return year
 }
 
-// Clearbit API 获取 logo URL
-export const getClearbitLogoUrl = async (url: string) => {
+// logo.dev API 获取 logo URL
+export const getLogoDevUrl = async (url: string) => {
   const parsedUrl = new URL(url);
   const domain = parsedUrl.hostname;
-  return `https://logo.clearbit.com/${domain}`;
+  return `https://img.logo.dev/${domain}?token=pk_XMRLa6d_THicc0IUVsTg1A`;
 }
 
 // Google S2 Converter 获取 favicon URL
@@ -22,12 +22,12 @@ export const getGoogleLogoUrl = async (url: string) => {
 // 获取网站的 logo 或 favicon，并进行容错处理
 export const getLogoUrl = async (url: string) => {
   try {
-    // 尝试使用 Clearbit 获取 logo
-    const clearbitLogoUrl = await getClearbitLogoUrl(url);
-    await fetchWrapper(clearbitLogoUrl); // 检查是否能成功获取
-    return clearbitLogoUrl;
+    // 尝试使用 logo.dev 获取 logo
+    const logoDevUrl = await getLogoDevUrl(url);
+    await fetchWrapper(logoDevUrl); // 检查是否能成功获取
+    return logoDevUrl;
   } catch (error) {
-    console.warn(`Clearbit logo not found for ${url}, trying Google Favicon.`);
+    console.warn(`logo.dev logo not found for ${url}, trying Google Favicon.`);
 
     try {
       // 尝试使用 Google S2 Converter 获取 favicon
